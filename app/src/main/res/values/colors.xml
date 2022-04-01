@@ -6,4 +6,15 @@
     <color name="blue700">#0288D1</color>
     <color name="grey">#34495E</color>
     <color name="red">#D32F2F</color>
+    <!-- Color rooms -->
+    <color name="b_red">#66D32F2F</color>
+    <color name="b_purple">#667B1FA2</color>
+    <color name="b_indigo">#66303F9F</color>
+    <color name="b_blue">#661976D2</color>
+    <color name="b_turquoise">#6600796B</color>
+    <color name="b_green">#66388E3C</color>
+    <color name="b_yellow">#66AFB42B</color>
+    <color name="b_orange">#66F57C00</color>
+    <color name="b_black">#66000000</color>
+    <color name="b_brown">#66812D00</color>
 </resources>
