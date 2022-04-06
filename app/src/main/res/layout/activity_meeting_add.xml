@@ -12,17 +12,68 @@
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
         android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <TextView
+            android:id="@+id/tv_name_meeting"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/name_meeting"
+            android:padding="10dp"
+            android:textColorHint="#78909C"
+            android:textSize="20sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="hint" />
-        </com.google.android.material.textfield.TextInputLayout>
+        <Spinner
+            android:id="@+id/spinnerRoomMeeting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tv_date_meeting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/date_meeting"
+            android:padding="10dp"
+            android:textColorHint="#78909C"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_time_meeting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/time_meeting"
+            android:padding="10dp"
+            android:textColorHint="#78909C"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_person_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/person_list"
+            android:padding="10dp"
+            android:textColorHint="#78909C"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btn_create_meeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/créer"
+            tools:ignore="TextContrastCheck" />
+
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
