@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MaRéu</string>
+    <string name="time_meeting">Heure de la réunion</string>
+    <string name="date_meeting">Date de la réunion</string>
+    <string name="name_meeting">Non de la réunion</string>
+    <string name="person_list">liste des participants</string>
+    <string name="créer">Créer</string>
 </resources>
