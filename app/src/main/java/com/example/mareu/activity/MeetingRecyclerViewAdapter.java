@@ -8,32 +8,41 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.R;
+import com.example.mareu.databinding.ItemMeetingBinding;
 import com.example.mareu.model.Meeting;
 
-public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecyclerViewAdapter.MeetingViewHolder> {
+import java.util.List;
+
+public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecyclerViewAdapter.ViewHolder> {
+    public List<Meeting> meetingList;
+
+    public MeetingRecyclerViewAdapter(List<Meeting> meetingList) {
+        this.meetingList = meetingList;
+    }
 
     @NonNull
     @Override
-    public MeetingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_meeting, parent, false);
-        return new MeetingViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(ItemMeetingBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MeetingViewHolder holder, int position) {
-        Meeting meeting = ;
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Meeting meeting = meetingList.get(position);
+        //holder.viewBinding.tvRoomName.setText(meeting.getFullName());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return meetingList.size();
     }
 
-    public class MeetingViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private ItemMeetingBinding viewBinding;
 
-        public MeetingViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public ViewHolder(ItemMeetingBinding viewBinding) {
+            super(viewBinding.getRoot());
+            this.viewBinding = viewBinding;
         }
     }
 }
