@@ -1,5 +1,7 @@
 package com.example.mareu.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,29 +9,40 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mareu.R;
 import com.example.mareu.databinding.ItemMeetingBinding;
+import com.example.mareu.databinding.ListMeetingBinding;
 import com.example.mareu.model.Meeting;
 
 import java.util.List;
 
 public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecyclerViewAdapter.ViewHolder> {
     public List<Meeting> meetingList;
+    Context context;
 
-    public MeetingRecyclerViewAdapter(List<Meeting> meetingList) {
+    public MeetingRecyclerViewAdapter(List<Meeting> meetingList, Context context) {
         this.meetingList = meetingList;
+        this.context= context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(ItemMeetingBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new ViewHolder(ItemMeetingBinding
+                .inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Meeting meeting = meetingList.get(position);
-        //holder.viewBinding.tvRoomName.setText(meeting.getFullName());
+        //holder.viewBinding.tvRoomName.setText(meeting.getNameMeeting());
+
+        holder.lmBinding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,AddMeeting.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -38,7 +51,8 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemMeetingBinding viewBinding;
+        public ItemMeetingBinding viewBinding;
+        public ListMeetingBinding lmBinding;
 
         public ViewHolder(ItemMeetingBinding viewBinding) {
             super(viewBinding.getRoot());
