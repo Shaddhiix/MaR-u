@@ -4,12 +4,14 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mareu.R;
 import com.example.mareu.databinding.ActivityMeetingAddBinding;
 
 import java.util.Calendar;
@@ -24,6 +26,8 @@ public class AddMeeting extends AppCompatActivity implements DatePickerDialog.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ActivityMeetingAddBinding.inflate(getLayoutInflater());
         View view = acBinding.getRoot();
@@ -54,7 +58,10 @@ public class AddMeeting extends AppCompatActivity implements DatePickerDialog.On
 
         //Spinner
         spinRoom = acBinding.spinnerRoomMeeting;
-
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.room_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinRoom.setAdapter(adapter);
     }
 
     @Override
