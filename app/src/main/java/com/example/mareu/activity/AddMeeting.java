@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ public class AddMeeting extends AppCompatActivity implements DatePickerDialog.On
 
     public DatePickerDialog datePickerDialog;
     public TimePickerDialog timePickerDialog;
+    Spinner spinRoom;
     ActivityMeetingAddBinding acBinding;
 
     @Override
@@ -49,6 +51,10 @@ public class AddMeeting extends AppCompatActivity implements DatePickerDialog.On
                 timePickerDialog.show();
             }
         });
+
+        //Spinner
+        spinRoom = acBinding.spinnerRoomMeeting;
+
     }
 
     @Override
