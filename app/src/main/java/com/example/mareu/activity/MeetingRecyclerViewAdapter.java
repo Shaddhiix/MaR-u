@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.databinding.ItemMeetingBinding;
 import com.example.mareu.databinding.ListMeetingBinding;
+import com.example.mareu.events.DeleteMeetingEvent;
 import com.example.mareu.model.Meeting;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -34,13 +37,20 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Meeting meeting = meetingList.get(position);
-        //holder.viewBinding.tvRoomName.setText(meeting.getNameMeeting());
+        holder.viewBinding.tvRoomName.setText(meeting.getNameMeeting());
 
         holder.lmBinding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,AddMeeting.class);
                 context.startActivity(intent);
+            }
+        });
+
+        holder.viewBinding.ivDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
             }
         });
     }
