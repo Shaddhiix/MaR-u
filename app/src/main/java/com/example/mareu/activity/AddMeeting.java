@@ -10,18 +10,15 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.example.mareu.R;
 import com.example.mareu.databinding.ActivityMeetingAddBinding;
 
-import java.util.Calendar;
-
 public class AddMeeting extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    public DatePickerDialog datePickerDialog;
-    public TimePickerDialog timePickerDialog;
-    Spinner spinRoom;
-    ActivityMeetingAddBinding acBinding;
+    private Spinner spinRoom;
+    private ActivityMeetingAddBinding acBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,27 +29,19 @@ public class AddMeeting extends AppCompatActivity implements DatePickerDialog.On
         acBinding = ActivityMeetingAddBinding.inflate(getLayoutInflater());
         setContentView(acBinding.getRoot());
 
-        Calendar calendar = Calendar.getInstance();
-
-        //DatePicker
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
         acBinding.tvDateMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datePickerDialog.show();
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "date picker");
             }
         });
 
-        //TimePicker
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
         acBinding.tvTimeMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timePickerDialog.show();
+                DialogFragment timePicker = new TimePickerFragment();
+                timePicker.show(getSupportFragmentManager(),"time picker");
             }
         });
 
@@ -75,7 +64,7 @@ public class AddMeeting extends AppCompatActivity implements DatePickerDialog.On
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-        String time = hourOfDay + ":" + minute;
+        String time = hourOfDay + "h" + minute;
         acBinding.tvTimeMeeting.setText(time);
     }
 }
