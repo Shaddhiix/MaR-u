@@ -21,7 +21,7 @@ import java.util.List;
 
 public class MeetingList extends AppCompatActivity {
 
-    public MeetingApiService apiService;
+    private MeetingApiService apiService;
     private ListMeetingBinding lmBinding;
 
     @Override
