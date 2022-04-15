@@ -29,9 +29,8 @@ public class AddMeeting extends AppCompatActivity implements DatePickerDialog.On
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ActivityMeetingAddBinding.inflate(getLayoutInflater());
-        View view = acBinding.getRoot();
-        setContentView(view);
+        acBinding = ActivityMeetingAddBinding.inflate(getLayoutInflater());
+        setContentView(acBinding.getRoot());
 
         Calendar calendar = Calendar.getInstance();
 
@@ -39,6 +38,7 @@ public class AddMeeting extends AppCompatActivity implements DatePickerDialog.On
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
+
         acBinding.tvDateMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
