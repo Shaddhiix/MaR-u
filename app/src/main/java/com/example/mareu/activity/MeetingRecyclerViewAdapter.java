@@ -1,5 +1,6 @@
 package com.example.mareu.activity;
 
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +32,13 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         Meeting meeting = meetingList.get(position);
+
         holder.viewBinding.tvRoomName.setText(meeting.getNameMeeting());
+
+        Drawable background = holder.viewBinding.ivAvatar.getBackground();
+        background.setTint(meeting.getColorMeeting());
 
         holder.viewBinding.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override

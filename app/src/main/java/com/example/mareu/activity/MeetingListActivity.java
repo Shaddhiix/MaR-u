@@ -19,7 +19,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
-public class MeetingList extends AppCompatActivity {
+public class MeetingListActivity extends AppCompatActivity {
 
     private MeetingApiService apiService;
     private ListMeetingBinding lmBinding;
@@ -38,12 +38,10 @@ public class MeetingList extends AppCompatActivity {
         lmBinding.floatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MeetingList.this,AddMeeting.class);
+                Intent intent = new Intent(MeetingListActivity.this,AddMeetingActivity.class);
                 startActivity(intent);
             }
         });
-
-        initList();
     }
 
     private void initList() {
@@ -55,6 +53,12 @@ public class MeetingList extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initList();
     }
 
     @Override
