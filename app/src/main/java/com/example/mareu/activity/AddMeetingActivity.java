@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
@@ -20,6 +20,7 @@ import com.example.mareu.databinding.ActivityMeetingAddBinding;
 import com.example.mareu.di.DI;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.services.MeetingApiService;
+import com.google.android.material.chip.Chip;
 
 import java.util.Random;
 
@@ -35,28 +36,19 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         super.onCreate(savedInstanceState);
         acBinding = ActivityMeetingAddBinding.inflate(getLayoutInflater());
         setContentView(acBinding.getRoot());
+        meetingApiService = DI.getMeetingApiService();
 
         //Press Back
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        acBinding.tvDateMeeting.setOnClickListener(v -> {
-            DialogFragment datePicker = new DatePickerFragment();
-            datePicker.show(getSupportFragmentManager(), "date picker");
-        });
-
-        acBinding.tvTimeMeeting.setOnClickListener(v -> {
-            DialogFragment timePicker = new TimePickerFragment();
-            timePicker.show(getSupportFragmentManager(),"time picker");
-        });
+        //Date & time Picker
+        initListener();
 
         //Spinner
-        spinRoom = acBinding.spinnerRoomMeeting;
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.room_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinRoom.setAdapter(adapter);
+        initSpinner();
 
-        meetingApiService = DI.getMeetingApiService();
+        //Chip
+        initChip();
 
         randomColor();
         addMeeting();
@@ -104,10 +96,57 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         });
     }
 
-    void randomColor() {
+    private void randomColor() {
         Random rnd = new Random();
         color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
         Drawable view = acBinding.avatarRoom.getBackground();
         view.setTint(color);
+    }
+
+    private void initListener() {
+
+        acBinding.tvDateMeeting.setOnClickListener(v -> {
+            DialogFragment datePicker = new DatePickerFragment();
+            datePicker.show(getSupportFragmentManager(), "date picker");
+        });
+
+        acBinding.tvTimeMeeting.setOnClickListener(v -> {
+            DialogFragment timePicker = new TimePickerFragment();
+            timePicker.show(getSupportFragmentManager(),"time picker");
+        });
+    }
+
+    private void initSpinner() {
+
+        spinRoom = acBinding.spinnerRoomMeeting;
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.room_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinRoom.setAdapter(adapter);
+    }
+
+    private void initChip() {
+
+        acBinding.tvPersonName.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                String email = acBinding.tvPersonName.getText().toString();
+                if(!email.isEmpty()) {
+                    addChipGroup(email);
+                    acBinding.tvPersonName.setText("");
+                }
+            }
+            return true;
+        });
+    }
+
+    private void addChipGroup(String text) {
+        Chip chip = new Chip(this);
+        chip.setText(text);
+        chip.setCloseIconVisible(true);
+        chip.setOnCloseIconClickListener(v -> acBinding.chipGroupMail.removeView(chip));
+
+        chip.setClickable(false);
+        chip.setCheckable(false);
+        acBinding.chipGroupMail.addView(chip);
     }
 }
