@@ -18,12 +18,12 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/tv_room_name"
+        android:id="@+id/tv_meeting_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
-        android:text="Text 1"
+        android:text="Réunion A"
         android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="@color/black"
@@ -31,25 +31,79 @@
         app:layout_constraintStart_toEndOf="@id/iv_avatar"/>
 
     <TextView
+        android:id="@+id/trait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:gravity="center_vertical"
+        android:text="@string/séparateur"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/tv_meeting_name"
+        app:layout_constraintStart_toEndOf="@id/tv_meeting_name" />
+
+    <TextView
+        android:id="@+id/tv_time_meeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:text="heure"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/trait"/>
+
+    <TextView
+        android:id="@+id/trait2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:gravity="center_vertical"
+        android:text="@string/séparateur"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/tv_time_meeting"
+        app:layout_constraintStart_toEndOf="@id/tv_time_meeting" />
+
+    <TextView
+        android:id="@+id/tv_room_meeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:text="Salle"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/trait2"/>
+
+    <TextView
         android:id="@+id/tv_employees"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="6dp"
-        android:text="Text 2"
+        android:text="@string/liste_des_participants"
         android:textSize="14sp"
-        android:textColor="@color/black"
+        android:textColorHighlight="@color/black"
         app:layout_constraintStart_toEndOf="@id/iv_avatar"
-        app:layout_constraintTop_toBottomOf="@id/tv_room_name" />
+        app:layout_constraintTop_toBottomOf="@id/tv_meeting_name" />
 
     <ImageView
         android:id="@+id/iv_delete"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:foregroundGravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_delete"
         tools:ignore="ContentDescription" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

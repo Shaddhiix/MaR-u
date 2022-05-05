@@ -11,8 +11,8 @@ import java.util.List;
 public abstract class MeetingGenerator {
 
     public static List<Meeting> DUMMY_MEETINGS = Arrays.asList(
-          new Meeting(System.currentTimeMillis(), "Présentation A", "Salle 1","15/04/2022",
-                  "10:00","max@lamzone.com", Color.BLUE)
+          new Meeting(System.currentTimeMillis(), "Step'n' App", "Salle 1","15/04/2022",
+                  "10h00","max@lamzone.com", Color.BLUE)
             );
 
     static List<Meeting> generateMeetings() {
