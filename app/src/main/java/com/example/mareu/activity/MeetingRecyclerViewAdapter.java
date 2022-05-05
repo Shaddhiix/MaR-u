@@ -2,7 +2,6 @@ package com.example.mareu.activity;
 
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -35,17 +34,16 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
         Meeting meeting = meetingList.get(position);
 
-        holder.viewBinding.tvRoomName.setText(meeting.getNameMeeting());
+        holder.itemBinding.tvMeetingName.setText(meeting.getNameMeeting());
+        holder.itemBinding.tvTimeMeeting.setText(meeting.getTimeMeeting());
+        holder.itemBinding.tvRoomMeeting.setText(meeting.getNameRoom());
+        holder.itemBinding.tvEmployees.setText(meeting.getPersonList());
 
-        Drawable background = holder.viewBinding.ivAvatar.getBackground();
+        Drawable background = holder.itemBinding.ivAvatar.getBackground();
         background.setTint(meeting.getColorMeeting());
 
-        holder.viewBinding.ivDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
-            }
-        });
+        holder.itemBinding.ivDelete.setOnClickListener(v -> EventBus.getDefault().post(new DeleteMeetingEvent(meeting)));
+
     }
 
     @Override
@@ -54,11 +52,11 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ItemMeetingBinding viewBinding;
+        public ItemMeetingBinding itemBinding;
 
-        public ViewHolder(ItemMeetingBinding viewBinding) {
-            super(viewBinding.getRoot());
-            this.viewBinding = viewBinding;
+        public ViewHolder(ItemMeetingBinding itemBinding) {
+            super(itemBinding.getRoot());
+            this.itemBinding = itemBinding;
         }
     }
 }
