@@ -42,7 +42,8 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         Drawable background = holder.itemBinding.ivAvatar.getBackground();
         background.setTint(meeting.getColorMeeting());
 
-        holder.itemBinding.ivDelete.setOnClickListener(v -> EventBus.getDefault().post(new DeleteMeetingEvent(meeting)));
+        holder.itemBinding.ivDelete.setOnClickListener(v -> EventBus.getDefault()
+                .post(new DeleteMeetingEvent(meeting)));
 
     }
 
