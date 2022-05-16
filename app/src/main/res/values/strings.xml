@@ -7,6 +7,7 @@
     <string name="créer">Créer</string>
     <string name="liste_des_participants">Liste des participants</string>
     <string name="séparateur">-</string>
+    <string name="filter_room" />
 
     <string-array name="room_array">
         <item>Salle 1</item>
