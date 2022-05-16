@@ -21,7 +21,10 @@ import com.example.mareu.di.DI;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.services.MeetingApiService;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class AddMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -80,15 +83,15 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         acBinding.tvTimeMeeting.setText(time);
     }
 
-    void addMeeting() {
+    private void addMeeting() {
         acBinding.btnCreateMeeting.setOnClickListener(v -> {
             Meeting meeting = new Meeting(
                     System.currentTimeMillis(),
-                    acBinding.spinnerRoomMeeting.getSelectedItem().toString(),
                     acBinding.tvNameMeeting.getText().toString(),
+                    acBinding.spinnerRoomMeeting.getSelectedItem().toString(),
                     acBinding.tvDateMeeting.getText().toString(),
                     acBinding.tvTimeMeeting.getText().toString(),
-                    acBinding.tvPersonName.getText().toString(),
+                   getChipGroupValues(),
                     color);
 
             meetingApiService.createMeeting(meeting);
@@ -148,5 +151,15 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         chip.setClickable(false);
         chip.setCheckable(false);
         acBinding.chipGroupMail.addView(chip);
+    }
+
+    private String getChipGroupValues(){
+        ChipGroup chipGroup = acBinding.chipGroupMail;
+        List <String> participants = new ArrayList<>();
+        for (int i=0; i<chipGroup.getChildCount();i++) {
+            Chip chip = (Chip) chipGroup.getChildAt(i);
+            participants.add(chip.getText().toString());
+        }
+        return participants.toString().replace("[","").replace("]","");
     }
 }
