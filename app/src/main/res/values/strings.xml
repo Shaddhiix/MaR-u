@@ -8,6 +8,12 @@
     <string name="liste_des_participants">Liste des participants</string>
     <string name="séparateur">-</string>
     <string name="filter_room" />
+    <string name="filter" />
+    <string name="par_salle">Par Salle</string>
+    <string name="par_date">Par Date</string>
+    <string name="by_all">Liste entière</string>
+    <string name="ok">Ok</string>
+    <string name="annuler">Annuler</string>
 
     <string-array name="room_array">
         <item>Salle 1</item>
