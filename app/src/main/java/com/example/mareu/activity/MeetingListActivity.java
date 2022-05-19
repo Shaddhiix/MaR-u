@@ -2,14 +2,21 @@ package com.example.mareu.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mareu.R;
 import com.example.mareu.databinding.ListMeetingBinding;
 import com.example.mareu.di.DI;
+import com.example.mareu.dialog_box.DateDialog;
+import com.example.mareu.dialog_box.RoomDialog;
 import com.example.mareu.events.DeleteMeetingEvent;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.services.MeetingApiService;
@@ -29,12 +36,44 @@ public class MeetingListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         lmBinding = ListMeetingBinding.inflate(getLayoutInflater());
         setContentView(lmBinding.getRoot());
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        lmBinding.recyclerView.setLayoutManager(layoutManager);
-
         apiService = DI.getMeetingApiService();
 
+        initRecyclerView();
+        initFab();
+        //initToolbar();
+    }
+
+    /** private void initToolbar() {
+        Toolbar toolbar = lmBinding.meetingToolbar;
+        setSupportActionBar(toolbar);
+    }
+     */
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_app_bar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.by_all:
+                initList();
+                break;
+            case R.id.by_room:
+                RoomDialog roomDialog = new RoomDialog();
+                roomDialog.show(getSupportFragmentManager(), "room dialog box");
+                break;
+            case R.id.by_date:
+                DateDialog dateDialog = new DateDialog();
+                dateDialog.show(getSupportFragmentManager(), "date dialog");
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void initFab() {
         lmBinding.floatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +81,11 @@ public class MeetingListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void initRecyclerView() {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        lmBinding.recyclerView.setLayoutManager(layoutManager);
     }
 
     private void initList() {
