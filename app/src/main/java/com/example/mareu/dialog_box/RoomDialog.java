@@ -4,11 +4,12 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
@@ -20,22 +21,32 @@ import org.greenrobot.eventbus.EventBus;
 
 public class RoomDialog extends AppCompatDialogFragment {
 
-    DialogRoomSpinnerBinding drsBinding;
-    Spinner dSpinner;
+    private DialogRoomSpinnerBinding drsBinding;
+    private View dialogview;
 
-    @NonNull
+   @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_room_spinner, null);
-        dSpinner = drsBinding.dialogRoomSpinner;
+   public Dialog onCreateDialog(Bundle savedInstanceState) {
+       drsBinding = DialogRoomSpinnerBinding.inflate(LayoutInflater.from(getActivity()));
+       dialogview = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_room_spinner, null);
+        return new AlertDialog.Builder(getActivity()).setView(drsBinding.getRoot()).setTitle("Choix de la salle").create();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return dialogview;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item,
                 getResources().getStringArray(R.array.room_array));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dSpinner.setAdapter(adapter);
+        drsBinding.dialogRoomSpinner.setAdapter(adapter);
 
-        dSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        drsBinding.dialogRoomSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -47,11 +58,10 @@ public class RoomDialog extends AppCompatDialogFragment {
             }
         });
 
-        builder.setTitle("Choix de la salle");
         drsBinding.okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String selectedRoom = dSpinner.getSelectedItem().toString().trim();
+                String selectedRoom = drsBinding.dialogRoomSpinner.getSelectedItem().toString().trim();
                 EventBus.getDefault().post(new FilterByRoomEvent(selectedRoom));
                 dismiss();
             }
@@ -63,7 +73,10 @@ public class RoomDialog extends AppCompatDialogFragment {
                 dismiss();
             }
         });
-        builder.setView(view);
-        return builder.create();
+    }
+    @Override
+    public void onDestroy() {
+       dialogview = null;
+        super.onDestroy();
     }
 }
