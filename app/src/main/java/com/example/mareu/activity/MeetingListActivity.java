@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +17,7 @@ import com.example.mareu.di.DI;
 import com.example.mareu.dialog_box.DateDialog;
 import com.example.mareu.dialog_box.RoomDialog;
 import com.example.mareu.events.DeleteMeetingEvent;
+import com.example.mareu.events.FilterByRoomEvent;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.services.MeetingApiService;
 
@@ -40,14 +40,7 @@ public class MeetingListActivity extends AppCompatActivity {
 
         initRecyclerView();
         initFab();
-        //initToolbar();
     }
-
-    /** private void initToolbar() {
-        Toolbar toolbar = lmBinding.meetingToolbar;
-        setSupportActionBar(toolbar);
-    }
-     */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -116,4 +109,16 @@ public class MeetingListActivity extends AppCompatActivity {
         apiService.deleteMeeting(event.meeting);
         initList();
     }
+
+    @Subscribe
+    public void onFilterByRoom(FilterByRoomEvent event) {
+        List<Meeting> lMeetings = apiService.getMeetingByRoom(event.getRoomSelected());
+        lmBinding.recyclerView.setAdapter(new MeetingRecyclerViewAdapter(lMeetings));
+    }
+
+   /* @Subscribe
+    public void onFilterByDate(FilterByRoomEvent event) {
+        List<Meeting lMeetings = apiService.getMeetingByDate(event.);
+        lmBinding.recyclerView.setAdapter((new MeetingRecyclerViewAdapter(lMeetings)));
+    } */
 }
