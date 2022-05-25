@@ -17,6 +17,7 @@ import com.example.mareu.di.DI;
 import com.example.mareu.dialog_box.DateDialog;
 import com.example.mareu.dialog_box.RoomDialog;
 import com.example.mareu.events.DeleteMeetingEvent;
+import com.example.mareu.events.FilterByDateEvent;
 import com.example.mareu.events.FilterByRoomEvent;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.services.MeetingApiService;
@@ -116,9 +117,9 @@ public class MeetingListActivity extends AppCompatActivity {
         lmBinding.recyclerView.setAdapter(new MeetingRecyclerViewAdapter(lMeetings));
     }
 
-   /* @Subscribe
-    public void onFilterByDate(FilterByRoomEvent event) {
-        List<Meeting lMeetings = apiService.getMeetingByDate(event.);
+   @Subscribe
+    public void onFilterByDate(FilterByDateEvent event) {
+        List<Meeting> lMeetings = apiService.getMeetingByDate(event.getDateSelected());
         lmBinding.recyclerView.setAdapter((new MeetingRecyclerViewAdapter(lMeetings)));
-    } */
+    }
 }
