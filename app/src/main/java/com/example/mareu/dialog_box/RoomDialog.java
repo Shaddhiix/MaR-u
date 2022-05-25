@@ -14,21 +14,21 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.mareu.R;
-import com.example.mareu.databinding.DialogRoomSpinnerBinding;
+import com.example.mareu.databinding.DialogFilterRoomBinding;
 import com.example.mareu.events.FilterByRoomEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
 public class RoomDialog extends AppCompatDialogFragment {
 
-    private DialogRoomSpinnerBinding drsBinding;
+    private DialogFilterRoomBinding drsBinding;
     private View dialogview;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        drsBinding = DialogRoomSpinnerBinding.inflate(LayoutInflater.from(getActivity()));
-        dialogview = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_room_spinner, null);
+        drsBinding = DialogFilterRoomBinding.inflate(LayoutInflater.from(getActivity()));
+        dialogview = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_filter_room, null);
         return new AlertDialog.Builder(getActivity()).setView(drsBinding.getRoot()).setTitle("Choix de la salle").create();
     }
 

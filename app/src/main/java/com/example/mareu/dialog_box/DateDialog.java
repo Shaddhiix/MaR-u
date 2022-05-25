@@ -23,7 +23,7 @@ import java.util.Date;
 
 public class DateDialog extends DialogFragment {
 
-    private DialogFilterDateBindin dialogDate;
+    private DialogFilterDateBinding dialogDate;
     private View dialogView;
 
     @NonNull
