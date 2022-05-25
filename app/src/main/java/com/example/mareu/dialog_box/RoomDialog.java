@@ -24,11 +24,11 @@ public class RoomDialog extends AppCompatDialogFragment {
     private DialogRoomSpinnerBinding drsBinding;
     private View dialogview;
 
-   @NonNull
+    @NonNull
     @Override
-   public Dialog onCreateDialog(Bundle savedInstanceState) {
-       drsBinding = DialogRoomSpinnerBinding.inflate(LayoutInflater.from(getActivity()));
-       dialogview = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_room_spinner, null);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        drsBinding = DialogRoomSpinnerBinding.inflate(LayoutInflater.from(getActivity()));
+        dialogview = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_room_spinner, null);
         return new AlertDialog.Builder(getActivity()).setView(drsBinding.getRoot()).setTitle("Choix de la salle").create();
     }
 
@@ -74,9 +74,10 @@ public class RoomDialog extends AppCompatDialogFragment {
             }
         });
     }
+
     @Override
     public void onDestroy() {
-       dialogview = null;
+        dialogview = null;
         super.onDestroy();
     }
 }
