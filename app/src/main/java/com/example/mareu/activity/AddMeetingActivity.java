@@ -60,7 +60,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home : {
+            case android.R.id.home: {
                 finish();
                 return true;
             }
@@ -71,7 +71,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-        month +=1;
+        month += 1;
         String date = dayOfMonth + "/" + month + "/" + year;
         acBinding.tvDateMeeting.setText(date);
     }
@@ -91,7 +91,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
                     acBinding.spinnerRoomMeeting.getSelectedItem().toString(),
                     acBinding.tvDateMeeting.getText().toString(),
                     acBinding.tvTimeMeeting.getText().toString(),
-                   getChipGroupValues(),
+                    getChipGroupValues(),
                     color);
 
             meetingApiService.createMeeting(meeting);
@@ -115,7 +115,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
 
         acBinding.tvTimeMeeting.setOnClickListener(v -> {
             DialogFragment timePicker = new TimePickerFragment();
-            timePicker.show(getSupportFragmentManager(),"time picker");
+            timePicker.show(getSupportFragmentManager(), "time picker");
         });
     }
 
@@ -133,7 +133,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         acBinding.tvPersonName.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 String email = acBinding.tvPersonName.getText().toString();
-                if(!email.isEmpty()) {
+                if (!email.isEmpty()) {
                     addChipGroup(email);
                     acBinding.tvPersonName.setText("");
                 }
@@ -153,13 +153,13 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         acBinding.chipGroupMail.addView(chip);
     }
 
-    private String getChipGroupValues(){
+    private String getChipGroupValues() {
         ChipGroup chipGroup = acBinding.chipGroupMail;
-        List <String> participants = new ArrayList<>();
-        for (int i=0; i<chipGroup.getChildCount();i++) {
+        List<String> participants = new ArrayList<>();
+        for (int i = 0; i < chipGroup.getChildCount(); i++) {
             Chip chip = (Chip) chipGroup.getChildAt(i);
             participants.add(chip.getText().toString());
         }
-        return participants.toString().replace("[","").replace("]","");
+        return participants.toString().replace("[", "").replace("]", "");
     }
 }
