@@ -10,13 +10,17 @@ public class DummyMeetingApiService implements MeetingApiService {
 
     private final List<Meeting> meetings = MeetingGenerator.generateMeetings();
 
-    /** Get a Meeting list */
+    /**
+     * Get a Meeting list
+     */
     @Override
     public List<Meeting> getMeeting() {
         return meetings;
     }
 
-    /** Get a Meeting list filtered by Room */
+    /**
+     * Get a Meeting list filtered by Room
+     */
     @Override
     public List<Meeting> getMeetingByRoom(String roomSelected) {
         List<Meeting> filterByRoom = new ArrayList<>();
@@ -28,7 +32,9 @@ public class DummyMeetingApiService implements MeetingApiService {
         return filterByRoom;
     }
 
-    /** Get a Meeting list filtered by date */
+    /**
+     * Get a Meeting list filtered by date
+     */
     @Override
     public List<Meeting> getMeetingByDate(Date date) {
         List<Meeting> filterByDate = new ArrayList<>();
@@ -38,13 +44,17 @@ public class DummyMeetingApiService implements MeetingApiService {
         return filterByDate;
     }
 
-    /** create a Meeting */
+    /**
+     * create a Meeting
+     */
     @Override
     public void createMeeting(Meeting meeting) {
         meetings.add(meeting);
     }
 
-    /** Delete a Meeting */
+    /**
+     * Delete a Meeting
+     */
     @Override
     public void deleteMeeting(Meeting meeting) {
         meetings.remove(meeting);
