@@ -51,7 +51,7 @@ public class MeetingListActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.by_all:
                 initList();
                 break;
@@ -70,7 +70,7 @@ public class MeetingListActivity extends AppCompatActivity {
         lmBinding.floatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MeetingListActivity.this,AddMeetingActivity.class);
+                Intent intent = new Intent(MeetingListActivity.this, AddMeetingActivity.class);
                 startActivity(intent);
             }
         });
