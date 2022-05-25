@@ -117,7 +117,7 @@ public class MeetingListActivity extends AppCompatActivity {
         lmBinding.recyclerView.setAdapter(new MeetingRecyclerViewAdapter(lMeetings));
     }
 
-   @Subscribe
+    @Subscribe
     public void onFilterByDate(FilterByDateEvent event) {
         List<Meeting> lMeetings = apiService.getMeetingByDate(event.getDateSelected());
         lmBinding.recyclerView.setAdapter((new MeetingRecyclerViewAdapter(lMeetings)));
