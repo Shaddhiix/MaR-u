@@ -36,10 +36,10 @@ public class DummyMeetingApiService implements MeetingApiService {
      * Get a Meeting list filtered by date
      */
     @Override
-    public List<Meeting> getMeetingByDate(Date date) {
+    public List<Meeting> getMeetingByDate(Date dateSelected) {
         List<Meeting> filterByDate = new ArrayList<>();
         for (Meeting m : meetings) {
-            if(m.getDateMeeting().equals(date)) {
+            if(m.getDateMeeting().equals(dateSelected)) {
                 filterByDate.add(m);
             }
         }

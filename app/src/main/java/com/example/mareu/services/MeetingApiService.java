@@ -7,19 +7,29 @@ import java.util.List;
 
 public interface MeetingApiService {
 
-    /** Get a Meeting list */
+    /**
+     * Get a Meeting list
+     */
     List<Meeting> getMeeting();
 
-    /** Get a Meeting list filtered by Room */
+    /**
+     * Get a Meeting list filtered by Room
+     */
     List<Meeting> getMeetingByRoom(String roomSelected);
 
-    /** Get a Meeting list filtered by Date */
-    List<Meeting> getMeetingByDate(Date date);
+    /**
+     * Get a Meeting list filtered by Date
+     */
+    List<Meeting> getMeetingByDate(Date dateSelected);
 
-    /** create a Meeting */
+    /**
+     * create a Meeting
+     */
     void createMeeting(Meeting meeting);
 
-    /** Delete a Meeting */
+    /**
+     * Delete a Meeting
+     */
     void deleteMeeting(Meeting meeting);
 
 }
