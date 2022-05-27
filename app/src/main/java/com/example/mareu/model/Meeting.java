@@ -1,8 +1,6 @@
 package com.example.mareu.model;
 
-import java.io.Serializable;
-
-public class Meeting implements Serializable {
+public class Meeting {
 
     private String nameMeeting;
 
