@@ -10,4 +10,11 @@ public class DI {
     public static MeetingApiService getMeetingApiService() {
         return service;
     }
+
+    /**
+     * Api service used for tests
+     */
+    public static MeetingApiService getNewInstanceApiService() {
+        return new DummyMeetingApiService ();
+    }
 }

@@ -20,7 +20,7 @@ public interface MeetingApiService {
     /**
      * Get a Meeting list filtered by Date
      */
-    List<Meeting> getMeetingByDate(Date dateSelected);
+    List<Meeting> getMeetingByDate(String dateSelected);
 
     /**
      * create a Meeting
