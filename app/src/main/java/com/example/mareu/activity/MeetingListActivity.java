@@ -1,23 +1,25 @@
 package com.example.mareu.activity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.R;
 import com.example.mareu.databinding.ListMeetingBinding;
 import com.example.mareu.di.DI;
-import com.example.mareu.dialog_box.DateDialog;
 import com.example.mareu.dialog_box.RoomDialog;
 import com.example.mareu.events.DeleteMeetingEvent;
-import com.example.mareu.events.FilterByDateEvent;
 import com.example.mareu.events.FilterByRoomEvent;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.services.MeetingApiService;
@@ -27,7 +29,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
-public class MeetingListActivity extends AppCompatActivity {
+public class MeetingListActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private MeetingApiService apiService;
     private ListMeetingBinding lmBinding;
@@ -61,8 +63,8 @@ public class MeetingListActivity extends AppCompatActivity {
                 roomDialog.show(getSupportFragmentManager(), "room dialog box");
                 break;
             case R.id.by_date:
-                DateDialog dateDialog = new DateDialog();
-                dateDialog.show(getSupportFragmentManager(), "date dialog");
+                DialogFragment datePicker = new DatePickerFragment ();
+                datePicker.show ( getSupportFragmentManager (), "date picker" );
         }
         return super.onOptionsItemSelected(item);
     }
@@ -117,9 +119,12 @@ public class MeetingListActivity extends AppCompatActivity {
         lmBinding.recyclerView.setAdapter(new MeetingRecyclerViewAdapter(lMeetings));
     }
 
-    @Subscribe
-    public void onFilterByDate(FilterByDateEvent event) {
-        List<Meeting> lMeetings = apiService.getMeetingByDate(event.getDateSelected());
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        month += 1;
+        String date = dayOfMonth + "/" + month + "/" + year;
+        Log.d("tagii", "date" + date);
+        List<Meeting> lMeetings = apiService.getMeetingByDate(date);
         lmBinding.recyclerView.setAdapter((new MeetingRecyclerViewAdapter(lMeetings)));
     }
 }
