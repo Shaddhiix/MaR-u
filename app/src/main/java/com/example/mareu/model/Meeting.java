@@ -3,15 +3,10 @@ package com.example.mareu.model;
 public class Meeting {
 
     private String nameMeeting;
-
     private String nameRoom;
-
     private String dateMeeting;
-
     private String timeMeeting;
-
     private String personList;
-
     private int colorMeeting;
 
     public Meeting(long l, String nameMeeting, String nameRoom, String dateMeeting, String timeMeeting, String personList, int colorMeeting) {

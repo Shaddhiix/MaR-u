@@ -12,7 +12,9 @@ public abstract class MeetingGenerator {
 
     public static List<Meeting> DUMMY_MEETINGS = Arrays.asList(
           new Meeting(System.currentTimeMillis(), "Step'n' App", "Salle 1","15/6/2022",
-                  "10h00","max@lamzone.com", Color.BLUE)
+                  "10h00","max@lamzone.com", Color.BLUE),
+            new Meeting(System.currentTimeMillis(), "Holy App", "Salle 5", "27/07/2022",
+                    "10h00","Ezéchiel@lamzone.com, Job@lamzone.com, David@lamzone.com", Color.BLACK)
             );
 
     static List<Meeting> generateMeetings() {
