@@ -10,7 +10,7 @@ public interface MeetingApiService {
     /**
      * Get a Meeting list
      */
-    List<Meeting> getMeeting();
+    List<Meeting> getMeetings();
 
     /**
      * Get a Meeting list filtered by Room

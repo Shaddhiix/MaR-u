@@ -32,7 +32,7 @@ public class MeetingUnitTest {
 
     @Test
     public void getMeetingWithSuccess() {
-        List<Meeting> meetings = service.getMeeting ();
+        List<Meeting> meetings = service.getMeetings ();
         List<Meeting> expectedMeetings = MeetingGenerator.DUMMY_MEETINGS;
         assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedMeetings.toArray()));
     }
@@ -48,19 +48,19 @@ public class MeetingUnitTest {
         int colorMeeting = Color.BLACK;
         Meeting meetingToAdd = new Meeting (l, nameMeeting, nameRoom,dateMeeting, timeMeeting,personList,colorMeeting);
         service.createMeeting(meetingToAdd);
-        assertTrue(service.getMeeting().contains(meetingToAdd));
+        assertTrue(service.getMeetings ().contains(meetingToAdd));
     }
 
     @Test
     public void deleteMeetingWithSuccess() {
-        Meeting meetingToDelete = service.getMeeting().get(0);
+        Meeting meetingToDelete = service.getMeetings ().get(0);
         service.deleteMeeting(meetingToDelete);
-        assertFalse(service.getMeeting().contains(meetingToDelete));
+        assertFalse(service.getMeetings ().contains(meetingToDelete));
     }
 
     @Test
     public void meetingByRoom() {
-        List<Meeting> actualMeetingByRoom = service.getMeeting();
+        List<Meeting> actualMeetingByRoom = service.getMeetings ();
         Meeting meetingByRoom = actualMeetingByRoom.get(1);
         List<Meeting> expectedMeetingByRoom = service.getMeetingByRoom("Salle 1");
         assertThat(expectedMeetingByRoom.size(), is(1));
@@ -69,9 +69,9 @@ public class MeetingUnitTest {
 
     @Test
     public void meetingByDate() {
-        List<Meeting> actualMeetingByDate = service.getMeeting();
+        List<Meeting> actualMeetingByDate = service.getMeetings ();
         Meeting meetingByDate = actualMeetingByDate.get(1);
-        List<Meeting> expectedMeetingByDate = service.getMeetingByDate("27/07/2022");
+        List<Meeting> expectedMeetingByDate = service.getMeetingByDate("27/7/2022");
         assertThat(expectedMeetingByDate.size(), is(1));
         assertTrue(expectedMeetingByDate.contains(meetingByDate));
     }

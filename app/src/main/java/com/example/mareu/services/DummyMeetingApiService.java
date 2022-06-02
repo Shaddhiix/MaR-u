@@ -13,7 +13,7 @@ public class DummyMeetingApiService implements MeetingApiService {
      * Get a Meeting list
      */
     @Override
-    public List<Meeting> getMeeting() {
+    public List<Meeting> getMeetings() {
         return meetings;
     }
 

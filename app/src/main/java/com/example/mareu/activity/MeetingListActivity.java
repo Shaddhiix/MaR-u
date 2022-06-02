@@ -85,7 +85,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
     }
 
     private void initList() {
-        List<Meeting> lMeetings = apiService.getMeeting();
+        List<Meeting> lMeetings = apiService.getMeetings ();
         lmBinding.recyclerView.setAdapter(new MeetingRecyclerViewAdapter(lMeetings));
     }
 
