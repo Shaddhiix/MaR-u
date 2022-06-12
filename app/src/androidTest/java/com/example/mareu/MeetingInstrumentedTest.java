@@ -39,14 +39,16 @@ import com.example.mareu.utils.DeleteViewAction;
 
 import org.hamcrest.Matchers;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 /**
  * Instrumented test
  **/
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(AndroidJUnit4.class)
 public class MeetingInstrumentedTest {
 
@@ -72,31 +74,11 @@ public class MeetingInstrumentedTest {
                 .perform(click());
     }
 
-    /**
-     * We ensure that our recyclerview is displaying at least on item
-     */
     @Test
-    public void theMeetingList_ShouldNotBeEmpty() {
-        onView( ViewMatchers.withId(R.id.recyclerView))
-                .check (matches(hasMinimumChildCount(1)));
-    }
-
-    /**
-     * When we delete an item, the item is no more shown
-     */
-    @Test
-    public void theMeetingList_deleteAction_shouldRemoveItem() {
-        onView ( withId ( R.id.recyclerView ) )
-                .check ( withItemCount ( ITEMS_COUNT ) )
-                .perform ( RecyclerViewActions.actionOnItemAtPosition ( 1, new DeleteViewAction () ) )
-                .check ( withItemCount ( ITEMS_COUNT - 1 ) );
-    }
-
-    @Test
-    public void AddaMeeting() {
+    public void A_addMeeting() {
         onView(withId(R.id.recyclerView))
                 .check(withItemCount(ITEMS_COUNT));
-       addReunion ();
+        addReunion ();
         onView(withId(R.id.tv_name_meeting))
                 .perform(typeText("App"), closeSoftKeyboard());
         onView(withId(R.id.spinnerRoomMeeting))
@@ -125,21 +107,42 @@ public class MeetingInstrumentedTest {
                 .check(withItemCount(ITEMS_COUNT +1));
     }
 
+    /**
+     * We ensure that our recyclerview is displaying at least on item
+     */
     @Test
-    public void CheckFilterByDate_isDisplayed() {
+    public void B_theMeetingList_ShouldNotBeEmpty() {
+        onView( ViewMatchers.withId(R.id.recyclerView))
+                .check (matches(hasMinimumChildCount(1)));
+    }
+
+    /**
+     * When we delete an item, the item is no more shown
+     */
+    @Test
+    public void C_theMeetingList_deleteAction_shouldRemoveItem() {
+        onView ( withId ( R.id.recyclerView ) )
+                .check ( withItemCount(3))
+                .perform ( RecyclerViewActions.actionOnItemAtPosition ( position, new DeleteViewAction () ) )
+                .check ( withItemCount (2) );
+    }
+    
+    @Test
+    public void D_checkFilterByDate_isDisplayed() {
         onView(withId(R.id.filter_btn))
                 .perform(click());
         onView(withText("Par Date"))
                 .perform(click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
-                .perform(PickerActions.setDate(2022, 7, 27));
+                .perform(PickerActions.setDate(2022, 7, 21));
         onView(withId(android.R.id.button1))
                 .perform(click());
         onView(withId(R.id.recyclerView))
                 .check(withItemCount(1));
     }
+    
     @Test
-    public void CheckFilterByRoom_isDisplayed() {
+    public void E_checkFilterByRoom_isDisplayed() {
         onView(withId(R.id.filter_btn))
                 .perform(click());
         onView(withText("Par Salle"))
