@@ -11,7 +11,6 @@ import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.PickerActions.setTime;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -52,8 +51,8 @@ import org.junit.runners.MethodSorters;
 @RunWith(AndroidJUnit4.class)
 public class MeetingInstrumentedTest {
 
-    private static int ITEMS_COUNT = 2;
-    private int position = 1;
+    private static final int ITEMS_COUNT = 2;
+    private final int position = 1;
 
     private MeetingListActivity listActivity;
     private MeetingApiService apiService;

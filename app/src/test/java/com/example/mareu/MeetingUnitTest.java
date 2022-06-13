@@ -61,7 +61,7 @@ public class MeetingUnitTest {
     @Test
     public void meetingByRoom() {
         List<Meeting> actualMeetingByRoom = service.getMeetings ();
-        Meeting meetingByRoom = actualMeetingByRoom.get(1);
+        Meeting meetingByRoom = actualMeetingByRoom.get(0);
         List<Meeting> expectedMeetingByRoom = service.getMeetingByRoom("Salle 1");
         assertThat(expectedMeetingByRoom.size(), is(1));
         assertTrue(expectedMeetingByRoom.contains(meetingByRoom));
