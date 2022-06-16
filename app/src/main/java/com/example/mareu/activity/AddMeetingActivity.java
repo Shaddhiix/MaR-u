@@ -1,14 +1,13 @@
 package com.example.mareu.activity;
 
-import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -20,6 +19,7 @@ import com.example.mareu.R;
 import com.example.mareu.databinding.ActivityMeetingAddBinding;
 import com.example.mareu.di.DI;
 import com.example.mareu.model.Meeting;
+import com.example.mareu.picker.Pick;
 import com.example.mareu.services.MeetingApiService;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class AddMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class AddMeetingActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
     private Spinner spinRoom;
     private ActivityMeetingAddBinding acBinding;
@@ -68,15 +68,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         }
         return super.onOptionsItemSelected ( item );
     }
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-        month += 1;
-        String date = dayOfMonth + "/" + month + "/" + year;
-        acBinding.tvDateMeeting.setText ( date );
-    }
-
+    
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
@@ -110,9 +102,11 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
 
     private void initListener() {
 
-        acBinding.tvDateMeeting.setOnClickListener ( v -> {
-            DialogFragment datePicker = new DatePickerFragment ();
-            datePicker.show ( getSupportFragmentManager (), "date picker" );
+        acBinding.tvDateMeeting.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Pick.pickDate ( acBinding.tvDateMeeting, AddMeetingActivity.this);
+            }
         } );
 
         acBinding.tvTimeMeeting.setOnClickListener ( v -> {
