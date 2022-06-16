@@ -78,18 +78,42 @@ public class AddMeetingActivity extends AppCompatActivity implements TimePickerD
 
     private void addMeeting() {
         acBinding.btnCreateMeeting.setOnClickListener(v -> {
-            Meeting meeting = new Meeting(
-                    System.currentTimeMillis(),
-                    acBinding.tvNameMeeting.getText().toString(),
-                    acBinding.spinnerRoomMeeting.getSelectedItem().toString(),
-                    acBinding.tvDateMeeting.getText().toString(),
-                    acBinding.tvTimeMeeting.getText().toString(),
-                    getChipGroupValues(),
-                    color);
+            
+            boolean isValid = true;
+            if (acBinding.tvNameMeeting.length() < 3)
+            {
+                acBinding.tvNameMeeting.setError("Entrer un titre (3 caractère minimum)");
+                acBinding.tvNameMeeting.requestFocus();
+                isValid = false;
+            }
+            if (acBinding.tvDateMeeting.length() == 0)
+            {
+                acBinding.tvDateMeeting.setError("Sélectionner une date");
+                acBinding.tvDateMeeting.requestFocus();
+                isValid = false;
+            }
+            if (acBinding.tvTimeMeeting.length() == 0)
+            {
+                acBinding.tvTimeMeeting.setError("Sélectionner une heure");
+                acBinding.tvTimeMeeting.requestFocus();
+                isValid = false;
+            }
+            else {
+                if(isValid) {
+                    Meeting meeting = new Meeting (
+                            System.currentTimeMillis (),
+                            acBinding.tvNameMeeting.getText ().toString (),
+                            acBinding.spinnerRoomMeeting.getSelectedItem ().toString (),
+                            acBinding.tvDateMeeting.getText ().toString (),
+                            acBinding.tvTimeMeeting.getText ().toString (),
+                            getChipGroupValues (),
+                            color );
 
-            meetingApiService.createMeeting ( meeting );
-            Toast.makeText ( this, "Réunion enregistrée", Toast.LENGTH_SHORT ).show ();
-            finish ();
+                    meetingApiService.createMeeting ( meeting );
+                    Toast.makeText ( this, "Réunion enregistrée", Toast.LENGTH_SHORT ).show ();
+                    finish ();
+                }
+            }
         } );
     }
 
